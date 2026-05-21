@@ -117,20 +117,26 @@ class DrawerWidget extends StatelessWidget {
                     ),)
                   ],
                 ),
+                Divider(),
                 SizedBox(
-                  height: 115,
+                  height: 100,
                 ),
                 //Cerrar sesion  drawer
-                Row(
-                  spacing: 20,
-                  children: [
-                    Icon(Icons.logout,
-                    size: sizeIconoDrawer,),
-                    Text('Cerrar Sesión',
-                    style: TextStyle(
-                      fontSize: sizeTextoDrawer
-                    ),)
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/');
+                  },
+                  child: Row(
+                    spacing: 20,
+                    children: [
+                      Icon(Icons.logout,
+                      size: sizeIconoDrawer,),
+                      Text('Cerrar Sesión',
+                      style: TextStyle(
+                        fontSize: sizeTextoDrawer
+                      ),)
+                    ],
+                  ),
                 ),
               ],
             ),
