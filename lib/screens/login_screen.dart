@@ -87,22 +87,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                       alignment: Alignment.center,
                                       width: 380,
                                       height: 60,
-                                      child: Flexible(child: 
-                                        TextFormField(
-                                          controller: _email,
-                                          textAlign: TextAlign.center,
-                                          decoration: InputDecoration(
-                                            // hintText: 'Ingrese el correo',
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(15),
-                                              gapPadding: BorderSide.strokeAlignCenter,
-                                              borderSide: BorderSide(style: BorderStyle.none)
-                                            ),
-                                            enabledBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
+                                      child: TextFormField(
+                                        controller: _email,
+                                        textAlign: TextAlign.center,
+                                        decoration: InputDecoration(
+                                          // hintText: 'Ingrese el correo',
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(15),
+                                            gapPadding: BorderSide.strokeAlignCenter,
+                                            borderSide: BorderSide(style: BorderStyle.none)
                                           ),
-                                        )
+                                          enabledBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -125,23 +123,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                       alignment: Alignment.center,
                                       width: 380,
                                       height: 60,
-                                      child: Flexible(child: 
-                                        TextFormField(
-                                          obscureText: true,
-                                          controller: _password,
-                                          textAlign: TextAlign.center,
-                                          decoration: InputDecoration(
-                                            // hintText: 'Ingrese el correo',
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(15),
-                                              gapPadding: BorderSide.strokeAlignCenter,
-                                              borderSide: BorderSide(style: BorderStyle.none)
-                                            ),
-                                            enabledBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
+                                      child: TextFormField(
+                                        obscureText: true,
+                                        controller: _password,
+                                        textAlign: TextAlign.center,
+                                        decoration: InputDecoration(
+                                          // hintText: 'Ingrese el correo',
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(15),
+                                            gapPadding: BorderSide.strokeAlignCenter,
+                                            borderSide: BorderSide(style: BorderStyle.none)
                                           ),
-                                        )
+                                          enabledBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -155,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: TextButton(onPressed: () async{
                                       bool logueo = await Provider.of<ProviderApi>(context,listen: false).Login(_email.text,_password.text);
                                       if(logueo==true){
-                                        Navigator.pushNamed(context, '/dashboard');
+                                        Navigator.pushNamed(context, '/home');
                                       }
                                     }, 
                                       child: Text(

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
+
+  const DrawerWidget({super.key});
+
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
   double sizeTextoDrawer = 18;
+
   double sizeIconoDrawer = 36;
 
-  DrawerWidget({super.key});
-
   // final double sizeIconoDrawer;
-  // final double sizeTextoDrawer;
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,9 +27,9 @@ class DrawerWidget extends StatelessWidget {
               children: [
                 //home drawer
                 GestureDetector(
-                  // onTap: (){
-                  //   Navigator.pushNamed(context, '/home');
-                  // },
+                  onTap: (){
+                    Navigator.pushNamed(context, '/home');
+                  },
                   child: Row(
                       spacing: 20,
                       children: [
@@ -35,6 +40,24 @@ class DrawerWidget extends StatelessWidget {
                     ],
                   ),
                 ),
+                //mi dia
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/day');
+                  },
+                  child: Row(
+                    spacing: 20,
+                    children: [
+                      Icon(Icons.wb_sunny,
+                      size: sizeIconoDrawer,),
+                      Text('Mi dia',style: TextStyle(
+                        fontSize: sizeTextoDrawer
+                      ))
+                    ]
+                  ),
+                ),
+
+
                 Row(
                   spacing: 20,
                   children: [
@@ -117,9 +140,9 @@ class DrawerWidget extends StatelessWidget {
                     ),)
                   ],
                 ),
-                Divider(),
+                // Divider(),
                 SizedBox(
-                  height: 100,
+                  height: 60,
                 ),
                 //Cerrar sesion  drawer
                 GestureDetector(
