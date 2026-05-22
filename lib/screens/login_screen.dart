@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 20),
                                     child: TextButton(onPressed: () async{
-                                      bool logueo = await Provider.of<ProviderApi>(context,listen: false).Login(_email.text,_password.text);
+                                      bool logueo = await Provider.of<ProviderApi>(context,listen: false).login(_email.text,_password.text);
                                       if(logueo==true){
                                         Navigator.pushNamed(context, '/home');
                                       }

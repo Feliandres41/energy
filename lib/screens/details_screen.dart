@@ -1,3 +1,4 @@
+import 'package:energy/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget{
@@ -6,7 +7,8 @@ class DetailsScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(),
+      drawer: DrawerWidget(),
     );
   }
 }

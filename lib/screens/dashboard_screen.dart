@@ -1,5 +1,5 @@
 import 'package:energy/providers/provider_api.dart';
-import 'package:energy/widgets/drawer_widget.dart';
+import 'package:energy/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,10 +42,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   //   });
   // }
 
-
+  double dias = 1;
+  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final tarifa = 943;
+    final radiacionTotal = 5.62;
+    final consumoHoy = 0.0;
+    final costoHoy = "0";
+    final ahorroSolarHoy = '0';
+
+    String busquedaDias = dias.round().toString();
+    
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -60,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       drawer: DrawerWidget(),
       //color drawer
-      drawerScrimColor: Colors.black.withOpacity(0.5),
+      drawerScrimColor: const Color.fromRGBO(0, 0, 0, 0.5),
       body: Consumer<ProviderApi>(builder: (context, value, child) => 
       Column(
         
@@ -81,15 +90,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color.fromARGB(255, 7, 140, 163),
-                      Color.fromARGB(255, 26, 95, 141),
+                      Color.fromARGB(255, 38, 158, 134),
+                      Color(0xFF1C6E5D),
                     ],
                     ),
                   ),child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        // padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.only(top: 12,left: 12,bottom: 7),
                         child: Row(
                           children: [
                             Container(
@@ -104,7 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             SizedBox(
                               width: 20,
                             ),
-                            Text('Rioacha | Gestión energetica asistida',style: TextStyle(
+                            Text('Hotel Solar Rioacha',style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w200
                             ),)
@@ -112,15 +122,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 1,left: 20),
-                        child: Text('Agente Solar Inteligente',style: TextStyle(
+                        padding: const EdgeInsets.only(top: 0,left: 13),
+                        child: Text('Dashboard energetico',style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w300
                         ),),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 2,left: 20),
-                        child: Text('Monitorea consumo, produccion solar, alertas te recomendaciones con una expericnencia mas clara.',
+                        padding: const EdgeInsets.only(top: 2,left: 15),
+                        child: Text('Tipo: hotel · Tarifa: $tarifa COP/kWh · Paneles: 15.0 kW',
                         style: TextStyle(
                           fontSize: 17,
                         ),textAlign: TextAlign.justify,),
@@ -133,252 +143,76 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           SizedBox(
-            height: 10,
-          ),
-          Card(
-            color: Color.fromARGB(255, 3, 56, 124),
-            child: Container(
-              width: size.width*0.9,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text("Bienvenido, Gerente Hotel Solar",style: TextStyle(
-                      fontSize: 22
-                    ),),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
+            height: 20,
           ),
           Row(
+            spacing: 30,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 10,
             children: [
-              Card(
-                color: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                // color: Colors.transparent,
-                child: Container(
-                  width: 270,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Dashboard',
-                            style: TextStyle(fontSize: 20),),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(103, 6, 48, 82),
-                                borderRadius: BorderRadius.circular(20)
-                              ),child: Icon(Icons.dashboard),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: 230,
-                          child: Text('Consulta KPIs, tendencia y comparativas del negocio',
-                          textAlign: TextAlign.justify,),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-
-
-              Card(
-                color: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                // color: Colors.transparent,
-                child: Container(
-                  width: 270,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Recomiendaciones',
-                            style: TextStyle(fontSize: 20),),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(103, 6, 48, 82),
-                                borderRadius: BorderRadius.circular(20)
-                              ),child: Icon(Icons.notifications),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: 230,
-                          child: Text('Consulta KPIs, tendencia y comparativas del negocio',
-                          textAlign: TextAlign.justify,),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-
-
-              Card(
-                color: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                // color: Colors.transparent,
-                child: Container(
-                  width: 270,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Reportes',
-                            style: TextStyle(fontSize: 20),),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(103, 6, 48, 82),
-                                borderRadius: BorderRadius.circular(20)
-                              ),child: Icon(Icons.edit_document),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: 230,
-                          child: Text('Consulta KPIs, tendencia y comparativas del negocio',
-                          textAlign: TextAlign.justify,),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Card(
-            child: Container(
-              width: size.width*0.9,
-              height: 45,
-              // color: Colors.red,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(104, 25, 98, 194),
-                borderRadius: BorderRadius.circular(10)
-              ),child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  Text('Usa el menu lateral para navegar. Cada modulo inicia en vista compacta y permite abrir detalles tecnicps cuando los necesites',
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(fontSize: 14),),
+                  Text('Radiación actual',style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300
+                  ),),
+                  Text('$radiacionTotal kWh/m2')
                 ],
               ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 50),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      spacing: 20,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(104, 25, 98, 194),
-                          // border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
-                          borderRadius: BorderRadius.circular(30)
-                        ),
-                        child: Icon(Icons.lightbulb,size: 35,),
-                        ),
-                        Text('Motor de recomendaciones',style: TextStyle(
-                          fontSize: 20
-                        ),)
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: size.width*0.4,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 240, 186, 106),
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                    )
-                  ],
-                ),
-              )
+
+              Column(
+                children: [
+                  Text('Consumo hoy',style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300
+                  ),),
+                  Text('$consumoHoy kWh')
+                ],
+              ),
+
+              Column(
+                children: [
+                  Text('Costo hoy',style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300
+                  ),),
+                  Text('\$ $costoHoy')
+                ],
+              ),
+
+              Column(
+                children: [
+                    Text('Ahorro solar hoy',style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300
+                  ),),
+                  Text('\$ $ahorroSolarHoy')
+                ],
+              ),
+
             ],
-          )
-        ],
-      ),
+          ),
+          Slider(
+            value: dias,
+            min: 1,
+            max: 60,
+            divisions: 60,
+            label: dias.round().toString(),
+            activeColor: Colors.red,
+            inactiveColor: Colors.grey,
+            onChanged: (value) async{
+              setState(() {
+                dias = value;
+                Provider.of<ProviderApi>(context,listen: false).consumoProduccion(busquedaDias);
+              });
+            },
+          ),
+          GrapickOneWidget(data: value.consumoEmpresa),
+          // ElevatedButton(onPressed: () async{
+          //   Provider.of<ProviderApi>(context,listen: false).consumoProduccion(busquedaDias);
+          // }, child: Text('${Provider.of<ProviderApi>(context,listen: false).token}\n$busquedaDias'))
+        ]
+      )
       )
     );
   }

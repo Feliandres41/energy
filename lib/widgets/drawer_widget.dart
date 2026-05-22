@@ -58,15 +58,20 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
 
 
-                Row(
-                  spacing: 20,
-                  children: [
-                    Icon(Icons.analytics,
-                    size: sizeIconoDrawer,),
-                    Text('Dashboard',style: TextStyle(
-                      fontSize: sizeTextoDrawer
-                    ))
-                  ]
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/dashboard');
+                  },
+                  child: Row(
+                    spacing: 20,
+                    children: [
+                      Icon(Icons.analytics,
+                      size: sizeIconoDrawer,),
+                      Text('Dashboard',style: TextStyle(
+                        fontSize: sizeTextoDrawer
+                      ))
+                    ]
+                  ),
                 ),
                 //consumo drawer
                 Row(
@@ -80,18 +85,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),)
                   ],
                 ),
-                //dato solres drawer
-                Row(
-                  spacing: 20,
-                  children: [
-                    Icon(Icons.sunny,
-                    size: sizeIconoDrawer,),
-                    Text('Datos Solares',
-                    style: TextStyle(
-                      fontSize: sizeTextoDrawer
-                    ),)
-                  ],
-                ),
+                //dato solares drawer
+                // Row(
+                //   spacing: 20,
+                //   children: [
+                //     Icon(Icons.sunny,
+                //     size: sizeIconoDrawer,),
+                //     Text('Datos Solares',
+                //     style: TextStyle(
+                //       fontSize: sizeTextoDrawer
+                //     ),)
+                //   ],
+                // ),
                 //Recomendaciones IA
                 Row(
                   spacing: 20,
@@ -129,20 +134,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   ],
                 ),
                 //reportes drawer
-                Row(
-                  spacing: 20,
-                  children: [
-                    Icon(Icons.report,
-                    size: sizeIconoDrawer,),
-                    Text('Reportes',
-                    style: TextStyle(
-                      fontSize: sizeTextoDrawer
-                    ),)
-                  ],
-                ),
+                // Row(
+                //   spacing: 20,
+                //   children: [
+                //     Icon(Icons.report,
+                //     size: sizeIconoDrawer,),
+                //     Text('Reportes',
+                //     style: TextStyle(
+                //       fontSize: sizeTextoDrawer
+                //     ),)
+                //   ],
+                // ),
                 // Divider(),
                 SizedBox(
-                  height: 60,
+                  // height: 60,
+                  // height: 180,
+                  height: 290,
                 ),
                 //Cerrar sesion  drawer
                 GestureDetector(

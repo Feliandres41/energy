@@ -61,7 +61,7 @@ class MyDayScreen extends StatelessWidget{
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 1,left: 13),
+                        padding: const EdgeInsets.only(top: 0,left: 13),
                         child: Text('Día con avisos importantes',style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w300
@@ -459,7 +459,7 @@ class MyDayScreen extends StatelessWidget{
 
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/')
+                      Navigator.pushReplacementNamed(context, '/details');
                     },
                     child: Card(
                       color: Colors.transparent,

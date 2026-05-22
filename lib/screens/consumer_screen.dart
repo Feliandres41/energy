@@ -1,3 +1,4 @@
+import 'package:energy/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ConsumerScreen extends StatelessWidget{
@@ -5,6 +6,9 @@ class ConsumerScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(),
+      drawer: DrawerWidget(),
+    );
   }
 }
