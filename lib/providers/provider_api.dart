@@ -15,6 +15,22 @@ class ProviderApi extends ChangeNotifier{
 
   /* Datos de consumo */
   List<Map<String, dynamic>> consumoEmpresa = [];
+  List<Map<String, dynamic>> radiacionSolarData = [];
+
+  Map<String, String> get _headers => {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+
+  Future<List<Map<String, dynamic>>> _fetchList(String uri) async {
+    final respuesta = await http.get(Uri.parse(uri), headers: _headers);
+    if (respuesta.statusCode != 200) return [];
+
+    final decoded = jsonDecode(respuesta.body);
+    if (decoded is List) return decoded.cast<Map<String, dynamic>>();
+    if (decoded is Map<String, dynamic>) return [decoded];
+    return [];
+  }
 
   /* Login */
   Future<bool> login(String email, String password) async {
@@ -45,7 +61,10 @@ class ProviderApi extends ChangeNotifier{
 
         notifyListeners();
 
-        await consumoProduccion('1');
+        await Future.wait([
+          consumoProduccion('30'),
+          radiacionSolar('30'),
+        ]);
 
         return true;
       } else {
@@ -57,58 +76,30 @@ class ProviderApi extends ChangeNotifier{
       return false;
     }
   } 
- 
   /*Consumo empresa */
-  Future<bool> consumoProduccion(String? dia) async {
-    if (id == 0 || token.isEmpty) {
-      print('consumoProduccion: no hay id o token válido');
-      return false;
-    }
+  Future<bool> consumoProduccion(String dias) async {
+    if (id == 0 || token.isEmpty) return false;
 
-    final days = dia == null || dia.isEmpty ? null : dia.split('.').first;
+    consumoEmpresa = await _fetchList(
+      "http://10.4.59.112:8001/api/v1/consumo/empresa/$id?days=$dias",
+    );
 
-    try {
-      final uri = days == null
-          ? Uri.parse("http://10.4.59.112:8001/api/v1/consumo/empresa/$id")
-          : Uri.parse("http://10.4.59.112:8001/api/v1/consumo/empresa/$id?days=$days");
-      print('GET $uri');
+    notifyListeners();
+    return consumoEmpresa.isNotEmpty;
+  }
+  //Radiación solar historica http://10.4.59.112:8001/api/v1/solar/radiacion?days=2
 
-      final respuesta = await http.get(
-        uri,
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-      );
+  Future<bool> radiacionSolar(String dias) async {
+    int dato = int.parse(dias);
+    dato = dato + 1;
+    if (token.isEmpty) return false;
 
-      print('status: ${respuesta.statusCode}');
-      print('body: ${respuesta.body}');
+    radiacionSolarData = await _fetchList(
+      "http://10.4.59.112:8001/api/v1/solar/radiacion?days=$dato",
+    );
 
-      if (respuesta.statusCode == 200) {
-        final decoded = jsonDecode(respuesta.body);
-
-        if (decoded is List) {
-          consumoEmpresa = decoded.cast<Map<String, dynamic>>();
-          print('consumoEmpresa items: ${consumoEmpresa.length}');
-          if (consumoEmpresa.isNotEmpty) {
-            print(consumoEmpresa[0]['fecha']);
-          }
-        } else if (decoded is Map<String, dynamic>) {
-          consumoEmpresa = [decoded];
-          print(decoded['fecha']);
-        } else {
-          print('consumoProduccion: respuesta inesperada');
-        }
-
-        notifyListeners();
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      print(e);
-      return false;
-    }
+    notifyListeners();
+    return radiacionSolarData.isNotEmpty;
   }
   
 }

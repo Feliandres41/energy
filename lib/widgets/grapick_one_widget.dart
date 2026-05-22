@@ -27,12 +27,12 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.data.isEmpty) {
-      return SizedBox(
+      return const SizedBox(
         height: 300,
         child: Center(
           child: Text(
             'Cargando datos...',
-            style: const TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8)),
+            style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8)),
           ),
         ),
       );
@@ -58,6 +58,7 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
       final consumoValue = consumo is num
           ? consumo.toDouble()
           : double.tryParse(consumo.toString()) ?? 0.0;
+
       final produccionValue = produccion is num
           ? produccion.toDouble()
           : double.tryParse(produccion.toString()) ?? 0.0;
@@ -67,10 +68,11 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
       titles.add(_formatDateLabel(fecha));
     }
 
-    final titleInterval = (sortedData.length / 6).ceil().clamp(1, sortedData.length);
+    final titleInterval =
+        (sortedData.length / 6).ceil().clamp(1, sortedData.length);
 
     return SizedBox(
-      height: 340,
+      height: 400,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -86,39 +88,20 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
             ),
           ),
           Row(
-            children: [
-              Row(
-                children: const [
-                  Icon(Icons.circle, size: 10, color: Colors.blue),
-                  SizedBox(width: 6),
-                  Text('Consumo', style: TextStyle(color: Colors.white)),
-                ],
-              ),
-              const SizedBox(width: 16),
-              Row(
-                children: const [
-                  Icon(Icons.circle, size: 10, color: Colors.amber),
-                  SizedBox(width: 6),
-                  Text('Producción solar', style: TextStyle(color: Colors.white)),
-                ],
-              ),
+            children: const [
+              Icon(Icons.circle, size: 10, color: Colors.blue),
+              SizedBox(width: 6),
+              Text('Consumo', style: TextStyle(color: Colors.white)),
+              SizedBox(width: 16),
+              Icon(Icons.circle, size: 10, color: Colors.amber),
+              SizedBox(width: 6),
+              Text('Producción solar', style: TextStyle(color: Colors.white)),
             ],
           ),
           const SizedBox(height: 12),
           Expanded(
             child: Row(
               children: [
-                RotatedBox(
-                  quarterTurns: 3,
-                  child: Text(
-                    'kWh',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: LineChart(
@@ -129,6 +112,7 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
                         drawVerticalLine: false,
                       ),
                       borderData: FlBorderData(show: false),
+
                       titlesData: FlTitlesData(
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
@@ -136,12 +120,11 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
                             interval: titleInterval.toDouble(),
                             getTitlesWidget: (value, meta) {
                               final index = value.toInt();
+
                               if (index < 0 || index >= titles.length) {
                                 return const SizedBox.shrink();
                               }
-                              if (index % titleInterval != 0 && index != titles.length - 1) {
-                                return const SizedBox.shrink();
-                              }
+
                               return Text(
                                 titles[index],
                                 style: const TextStyle(
@@ -152,10 +135,28 @@ class _GrapickOneWidgetState extends State<GrapickOneWidget> {
                             },
                           ),
                         ),
+
+                        // 🔥 AQUÍ ESTÁ EL FIX
                         leftTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: true),
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 50, // 👈 espacio para que no quede pegado
+                            getTitlesWidget: (value, meta) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: Text(
+                                  value.toInt().toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
+
                       lineBarsData: [
                         LineChartBarData(
                           spots: spotsConsumo,

@@ -1,3 +1,6 @@
+//grafica #1
+
+
 
 //details
 export './details_screen.dart';
