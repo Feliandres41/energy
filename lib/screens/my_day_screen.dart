@@ -394,62 +394,92 @@ class MyDayScreen extends StatelessWidget{
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Card(
-                    child: Container(
-                      width: widthCard*0.5,
-                      height: heightCard*0.2,
-                      child: Center(
-                        child: Text('Ver recomendaciones'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/recommend');
+                    },
+                    child: Card(
+                      color: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      child: Container(
+                        width: widthCard*0.5,
+                        height: heightCard*0.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Ver recomendaciones'),
+                        ),
                       ),
                     ),
                   ),
 
-                  Card(
-                    child: Container(
-                      width: widthCard*0.5,
-                      height: heightCard*0.2,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/alerts');
+                    },
+                    child: Card(
+                      color: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      child: Container(
+                        width: widthCard*0.5,
+                        height: heightCard*0.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Ver alertas'),
+                        ),
                       ),
-                      child: Center(
-                        child: Text('Ver alertas'),
+                    ),
+                  ),
+                  //consumidor
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/consumer');
+                    },
+                    child: Card(
+                      color: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      child: Container(
+                        width: widthCard*0.5,
+                        height: heightCard*0.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Abrir consumo'),
+                        ),
                       ),
                     ),
                   ),
 
-                  Card(
-                    child: Container(
-                      width: widthCard*0.5,
-                      height: heightCard*0.2,
-                      child: Center(
-                        child: Text('Abrir consumo'),
-                      ),
-                    ),
-                  ),
-
-                  Card(
-                    child: Container(
-                      width: widthCard*0.5,
-                      height: heightCard*0.2,
-                      child: Center(
-                        child: Text('Detalles tecnicos'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/')
+                    },
+                    child: Card(
+                      color: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      child: Container(
+                        width: widthCard*0.5,
+                        height: heightCard*0.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: const Color.fromARGB(34, 64, 195, 255)),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Detalles tecnicos'),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
 
-
-              //ver alertas
-              // Row(
-              //   children: [
-              //     Card(
-              //       child: Container(
-              //         width: ,
-              //       ),
-              //     )
-              //   ],
-              // ),
           ],
         ),
       ),

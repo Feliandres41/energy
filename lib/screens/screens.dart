@@ -1,6 +1,17 @@
+
+
+export './consumer_screen.dart';
+
+//alertas
+export 'package:energy/screens/alerts_screen.dart';
+
+
+//recommend
+export 'package:energy/screens/recommend_screen.dart';
+
+
 //my day
 export 'package:energy/screens/my_day_screen.dart';
-
 
 
 

@@ -7,7 +7,9 @@ class Routers {
   {
     '/':(context)=>LoginScreen(),
     '/home':(context)=>HomeScreen(),
-    '/day':(context)=>MyDayScreen()
-
+    '/day':(context)=>MyDayScreen(),
+    '/recommend':(context)=>RecommendScreen(),
+    '/alerts':(context)=>AlertsScreen(),
+    '/consumer':(context)=>ConsumerScreen(),
   };
 }
